@@ -1,0 +1,18 @@
+{
+  "name": "is-ftm-market",
+  "version": "1.0.0",
+  "description": "Idlesplinter fix the match market",
+  "main": "index.js",
+  "scripts": {
+    "setup": "node script/setup.js > .env",
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@star-dust/client": "0.0.11-alpha13",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.2",
+    "express": "^4.17.1"
+  }
+}

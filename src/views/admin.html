@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Idlesplinter Ftm Admin</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Fix The Match Market
+            </h1>
+            <p class="subtitle">
+                Welcome to <strong>Admin</strong> page!
+            </p>
+
+            <table class="table is-bordered is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>User</th>
+                        <th>Splinterlands Accounts</th>
+                        <th>Add Account</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for (let user in users) { %>
+                    <tr>
+                        <td><a href="/@<%= user %>" target="_blank"><%= user %></a></td>
+                        <td>
+                            <% users[user].forEach(function(account){ %>
+                            <span class="tag is-success"><%= account %></span>
+                            <% }); %>
+                        </td>
+                        <td>
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input id="addAccountInput-<%= user %>" class="input is-small" type="text"
+                                        placeholder="Account name">
+                                </div>
+                                <div class="control">
+                                    <a class="button is-info is-small" onclick="return addAccount('<%= user %>');">
+                                        Add Account
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <% } %>
+                    <tr>
+                        <td colspan="3">
+                            <div class="field has-addons">
+                                <div class="control">
+                                    <input id="addUserInput" class="input is-small" type="text" placeholder="User name">
+                                </div>
+                                <div class="control">
+                                    <a class="button is-info is-small" onclick="return addUser();">
+                                        Add User
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script>
+        const viewerId = "<%= viewerId %>";
+
+        function addUser() {
+            var $input = document.getElementById("addUserInput");
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let rs = JSON.parse(this.responseText);
+                    if (rs.success) {
+                        location.reload();
+                    } else {
+                        alert(rs.message);
+                    }
+                }
+            };
+            xhttp.open("POST", `createUser/${$input.value}`, true);
+            xhttp.send();
+        }
+
+        function addAccount(userId) {
+            var $input = document.getElementById(`addAccountInput-${userId}`);
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    let rs = JSON.parse(this.responseText);
+                    if (rs.success) {
+                        location.reload();
+                    } else {
+                        alert(rs.message);
+                    }
+                }
+            };
+            xhttp.open("POST", `addAccount/${userId}/${$input.value}`, true);
+            xhttp.send();
+        }
+    </script>
+</body>
+
+</html>

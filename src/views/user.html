@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Idlesplinter Ftm User</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <h1 class="title">
+                Fix The Match Market
+            </h1>
+            <p class="subtitle">
+                Welcome <strong><%= viewerId %></strong>!
+            </p>
+
+            <table class="table is-bordered is-fullwidth">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Token</th>
+                        <th>Description</th>
+                        <th>Balance</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% tokens.forEach(function(token){ %>
+                    <tr>
+                        <td><%= token.tokenId %></td>
+                        <td><%= token.name %></td>
+                        <td><%= token.desc %></td>
+                        <td><%= token.balance %></td>
+                        <td>
+                            <a class="button is-info is-small" disabled>
+                                Buy
+                            </a>
+                            <a class="button is-info is-small" disabled>
+                                Sell
+                            </a>
+                            <a class="button is-info is-small" onclick="return use();">
+                                Use
+                            </a>
+                        </td>
+                    </tr>
+                    <% }); %>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    <script>
+        const viewerId = "<%= viewerId %>";
+
+        function use() {
+            alert("Comming soon!");
+        }
+    </script>
+</body>
+
+</html>
